@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://"
+    "url": "git+https://github.com/mnouayti/chrome-extension.git"
   },
   "keywords": [
     "Chrome",
@@ -17,9 +17,9 @@
   "author": "med.nouayti@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "http://"
+    "url": "https://github.com/mnouayti/chrome-extension.git/issues"
   },
-  "homepage": "http://",
+  "homepage": "https://github.com/mnouayti/chrome-extension.git#readme",
   "dependencies": {
     "auth0-chrome": "^0.1.2",
     "jwt-decode": "^2.2.0"
