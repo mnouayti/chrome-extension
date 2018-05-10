@@ -1,0 +1,11 @@
+{
+  "name": "extension-chome",
+  "version": "1.0.0",
+  "description": "chrome extension to export web pages after authentication  and save theme in a mongodb database using a flask api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "med.nouayti@gmail.com",
+  "license": "ISC"
+}
