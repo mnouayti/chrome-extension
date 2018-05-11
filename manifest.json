@@ -9,11 +9,13 @@
         "default_popup": "src/browser_action/browser_action.html"
     },
     "background": {
-        "script": [""],
+        "script": ["./env.js", "node_modules/auth0-chrome/dist/auth0chrome.min.js", "src/main.js", "src/browser_action/getPagesSource.js"],
         "presistent": false
     },
     "permessions": [
         "tabs",
-        "<all_url>"
+        "<all_url>",
+        "identity",
+        "notifications"
     ]
 }
