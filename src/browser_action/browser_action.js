@@ -60,7 +60,12 @@ function renderDefaultView() {
   document.addEventListener('DOMContentLoaded', function() {
     var btn = document.getElementById('export-button');
     btn.addEventListener('click', function() {
+      var tablink;
+      chrome.tabs.getSelected(null,function(tab) {
+          tablink = tab.url;
+      });
 
+    console.log('the page url is ' + tablink)
       chrome.tabs.executeScript(null, {
         file: "getPagesSource.js"
       }, function() {
@@ -73,11 +78,10 @@ function renderDefaultView() {
       chrome.runtime.onMessage.addListener(function(request, sender) {
         if (request.action == "getSource") {
          console.log("the page source isss " + request.source);
-         axios.post('http://jsonplaceholder.typicode.com/posts', {
-          userId: '1',
-          id: '500',
-          title: 'a web page',
-          body: request.source
+         axios.post('http://0.0.0.0:5000/api/pages', {
+          html: '<a>riminder</a>',
+          title: "riminder",
+          url: tablink
         })
         .then(function (response) {
           console.log(response);
