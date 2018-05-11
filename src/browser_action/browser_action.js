@@ -61,8 +61,10 @@ function renderDefaultView() {
     var btn = document.getElementById('export-button');
     btn.addEventListener('click', function() {
       var tablink;
+      var tabtitle;
       chrome.tabs.getSelected(null,function(tab) {
           tablink = tab.url;
+          tabtitle = tab.title
       });
 
     console.log('the page url is ' + tablink)
@@ -79,12 +81,19 @@ function renderDefaultView() {
         if (request.action == "getSource") {
          console.log("the page source isss " + request.source);
          axios.post('http://0.0.0.0:5000/api/pages', {
-          html: '<a>riminder</a>',
-          title: "riminder",
-          url: tablink
+          title: tabtitle,
+          url: tablink,
+          html: request.source,
+          created_by : 'med'
         })
         .then(function (response) {
           console.log(response);
+          chrome.notifications.create({
+            type: 'basic',
+            iconUrl: '../../icons/icon128.png',
+            title: 'Exporting Successful',
+            message: 'You can display all your exprted pages in the app'
+          });
         })
         .catch(function (error) {
           console.log(error);

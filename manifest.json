@@ -5,6 +5,7 @@
     "description": "This extension allow you to export web pages after authentication, and save theme in a mongodb database using a flask api ",
     "homepage_url": "https://auth0.com/",
     "browser_action": {
+        "default_icon": "icons/icon.png",
         "default_title": "Auth0",
         "default_popup": "src/browser_action/browser_action.html"
     },
