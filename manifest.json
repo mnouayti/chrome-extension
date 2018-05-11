@@ -1,20 +1,20 @@
 {
-    "name": "Chrome extension",
+    "name": "chrome extension",
     "version": "0.1.0",
     "manifest_version": 2,
-    "description": "This extension allow you to export web pages after authentication, and save theme in a mongodb database using a flask api",
-    "hpmepage_url": "https://github.com/mnouayti/chrome-extension.git",
+    "description": "This extension allow you to export web pages after authentication, and save theme in a mongodb database using a flask api ",
+    "homepage_url": "https://auth0.com/",
     "browser_action": {
-        "default_title": "chrome-export",
+        "default_title": "Auth0",
         "default_popup": "src/browser_action/browser_action.html"
     },
     "background": {
-        "script": ["./env.js", "node_modules/auth0-chrome/dist/auth0chrome.min.js", "src/main.js", "src/browser_action/getPagesSource.js"],
-        "presistent": false
+      "scripts": ["./env.js", "node_modules/auth0-chrome/dist/auth0chrome.min.js", "src/main.js", "src/browser_action/getPagesSource.js"],
+      "persistent": false
     },
-    "permessions": [
+    "permissions": [
         "tabs",
-        "<all_url>",
+        "<all_urls>",
         "identity",
         "notifications"
     ]

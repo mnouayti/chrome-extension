@@ -1,7 +1,7 @@
 {
   "name": "export-chrome-extension",
   "version": "0.0.0",
-  "description": "chrome extension that export web pages after authentication, and save theme in a mongodb database using a flask api",
+  "description": "chrome extension that export web pages after authentication",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,14 +14,15 @@
     "Chrome",
     "Auth0"
   ],
-  "author": "med.nouayti@gmail.com",
+  "author": "Auth0",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mnouayti/chrome-extension.git/issues"
+    "url": "https://github.com/mnouayti/chrome-extensione/issues"
   },
-  "homepage": "https://github.com/mnouayti/chrome-extension.git#readme",
+  "homepage": "https://github.com/mnouayti/chrome-extension#readme",
   "dependencies": {
     "auth0-chrome": "^0.1.2",
+    "axios": "^0.18.0",
     "jwt-decode": "^2.2.0"
   },
   "devDependencies": {}
