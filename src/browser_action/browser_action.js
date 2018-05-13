@@ -57,50 +57,55 @@ function renderDefaultView() {
 
 
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById('export-button');
-    btn.addEventListener('click', function() {
-      var tablink;
-      var tabtitle;
-      chrome.tabs.getSelected(null,function(tab) {
-          tablink = tab.url;
-          tabtitle = tab.title
-      });
 
-    console.log('the page url is ' + tablink)
-      chrome.tabs.executeScript(null, {
-        file: "getPagesSource.js"
-      }, function() {
-        // If you try and inject into an extensions page or the webstore/NTP you'll get an error
-        if (chrome.runtime.lastError) {
-          console.log('There was an error injecting script : \n' + chrome.runtime.lastError.message);
-        }
-      });
+  var btn = document.getElementById('export-button');
+  btn.addEventListener('click', function() {
+    var tablink;
+    var tabtitle;
+    var created_by = $('.name').textContent
+    chrome.tabs.getSelected(null,function(tab) {
+        tablink = tab.url;
+        tabtitle = tab.title
+    });
+    
+    chrome.tabs.executeScript(null, {
+      file: "getPagesSource.js"
+    }, function() {
+      // If you try and inject into an extensions page or the webstore/NTP you'll get an error
+      if (chrome.runtime.lastError) {
+        console.log('There was an error injecting script : \n' + chrome.runtime.lastError.message);
+      }
+    });
 
-      chrome.runtime.onMessage.addListener(function(request, sender) {
-        if (request.action == "getSource") {
-         console.log("the page source isss " + request.source);
-         axios.post('http://0.0.0.0:5000/api/pages', {
-          title: tabtitle,
-          url: tablink,
-          html: request.source,
-          created_by : 'med'
-        })
-        .then(function (response) {
-          console.log(response);
-          chrome.notifications.create({
-            type: 'basic',
-            iconUrl: '../../icons/icon128.png',
-            title: 'Exporting Successful',
-            message: 'You can display all your exprted pages in the app'
-          });
-        })
-        .catch(function (error) {
-          console.log(error);
+    chrome.runtime.onMessage.addListener(function(request, sender) {
+      if (request.action == "getSource") {
+        console.log("the page source is " + request.source);
+        axios.post('http://0.0.0.0:5000/api/pages', {
+        title: tabtitle,
+        url: tablink,
+        html: request.source,
+        created_by : created_by
+      })
+      .then(function (response) {
+        console.log(response);
+        chrome.notifications.create({
+          type: 'basic',
+          iconUrl: '../../icons/icon128.png',
+          title: 'Exporting Successful',
+          message: 'You can display all your exprted pages in the app'
         });
-        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        chrome.notifications.create({
+          type: 'basic',
+          iconUrl: '../../icons/icon128.png',
+          title: 'Fail to export page',
+          message: 'You cant export the same page twice, and If you try and inject into an extensions page or the webstore/NTP you will get an error'
+        });
       });
-    }, false);
+      }
+    });
   }, false);
 
 
